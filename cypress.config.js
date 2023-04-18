@@ -17,4 +17,16 @@ module.exports = defineConfig({
     specPattern: "**/*.feature",
     setupNodeEvents,
   },
+  "reporter": "cypress-multi-reporters",
+    "reporterOptions": {
+        "reporterEnabled": "mochawesome",
+        "mochawesomeReporterOptions": {
+            "reportDir": "cypress/reports/mocha",
+            "charts": true,
+            "quite": true,
+            "overwrite": true,
+            "html": false,
+            "json": true
+        }
+    }
 });
