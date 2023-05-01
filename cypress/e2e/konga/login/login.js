@@ -18,9 +18,18 @@ When("I click on login or signup button", () => {
     loginPage.clickLoginSignupBtn();
 });
 
-When("I enter email address, password and", () => {
-    loginPage.setEmail("babatundeojo30@gmail.com")
-    loginPage.setPassword("Semilore@92");
+Then("I should see login modal", () => {
+    loginPage.validateLoginModalVisible("Login");
+});
+
+When("I enter email address and password", () => {
+    loginPage.setEmail(loginData.email)
+    loginPage.setPassword(loginData.password);
+});
+
+Then("I expected email address and password fields to have value", () => {
+    loginPage.validateEmailField(loginData.email)
+    loginPage.validatePasswordField(loginData.password);
 });
 
 When("I click on login button", () => {
@@ -28,5 +37,5 @@ When("I click on login button", () => {
 });
 
 Then("I should be redirected to my home page", () => {
-
+    loginPage.validateUserLogin("My Account");
 });

@@ -39,7 +39,6 @@ async function setupNodeEvents(on, config) {
 module.exports = defineConfig({
   e2e: {
     specPattern: "**/*.feature",
-    fixturesFolder: false,
     responseTimeout: 5000,
     supportFile: false,
     video: false,
