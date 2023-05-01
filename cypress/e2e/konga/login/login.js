@@ -22,14 +22,14 @@ Then("I should see login modal", () => {
     loginPage.validateLoginModalVisible("Login");
 });
 
-When("I enter email address, password", () => {
-    loginPage.setEmail("")
-    loginPage.setPassword("");
+When("I enter email address as {string} and password as {string}", (email, password) => {
+    loginPage.setEmail(email)
+    loginPage.setPassword(password);
 });
 
-Then("Email address and password should have expected values", () => {
-    loginPage.validateEmailField("")
-    loginPage.validatePasswordField("");
+Then("I expected email address as {string} and password as {string}", (email, password) => {
+    loginPage.validateEmailField(email)
+    loginPage.validatePasswordField(password);
 });
 
 When("I click on login button", () => {
