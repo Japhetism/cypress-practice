@@ -1,22 +1,6 @@
 /// <reference types="cypress" />
 
-// import pages
-import LoginPage from "../../pages/login";
-
 describe("Test Konga login ", () => {
-
-    // declare a login data variable
-    let loginData;
-
-    // get access to data using before hook
-    before(function() {
-        cy.fixture("login").then(function(res) {
-            loginData = res;
-        })
-    });
-
-    // create an instance of login class
-    const loginPage = new LoginPage();
 
     it("Test valid login credentials", () => {
 
@@ -24,16 +8,32 @@ describe("Test Konga login ", () => {
         cy.visit("https://www.konga.com/");
 
         // click on login/signup button
-        loginPage.clickLoginSignupBtn();
+        cy.get("._12e27_1r3kc > ._7ad32_SD12Y").click();
+
+        // confirm the login modal is visible
+        let expectedLoginText = "Login";
+        cy.get("h5").then((x) => {
+            let actualLoginText = x.text();
+            expect(actualLoginText).to.equal(expectedLoginText);
+        })
 
         // enter email address
-        loginPage.setEmail(loginData.email);
+        cy.get("#username").type("username@a.com");
+
+        // confirm that the username field have username@a.com as value
+        cy.get("#username").should("have.value", "username@a.com");
 
         // enter password
-        loginPage.setPassword(loginData.password);
+        cy.get("#password").type("pass");
+
+        // confirm that the password field have pass as value
+        cy.get("#password").should("have.value", "pass");
 
         // click on login button
-        loginPage.clickLoginBtn();
+        cy.get('button[type="submit"]').contains("Login").click();
+
+        // confirm that user is on the login screen by checking that the first span have My Account as a text
+        cy.get("._7ad32_SD12Y > span:nth-child(1)").should('have.text', "My Account");
 
     })
 })
